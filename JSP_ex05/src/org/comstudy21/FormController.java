@@ -31,7 +31,7 @@ public class FormController extends HttpServlet {
 		for(int i=0;i<interests.length;i++){
 			System.out.println(">>> "+ i + " : " + interests[i]);
 		}
-		//작업후에 index.html로 돌아간다.
+		//작업후에 index.html로 돌아간다. 테스트
 		resp.sendRedirect("index.html");
 	}
 }
