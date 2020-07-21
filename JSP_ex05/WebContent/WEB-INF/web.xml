@@ -9,14 +9,52 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
+  <context-param>
+    <param-name>driver</param-name>
+    <param-value>oracle.jdbc.driver.OracleDriver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:oracle:thin@localhost:1521:orcl</param-value>
+  </context-param>
+  <context-param>
+    <param-name>user</param-name>
+    <param-value>scott</param-value>
+  </context-param>
+  <context-param>
+    <param-name>password</param-name>
+    <param-value>tiger</param-value>
+  </context-param>
   <servlet>
-  	<servlet-name>form</servlet-name>
-  	<servlet-class>org.comstudy21.FormController</servlet-class>
+    <servlet-name>form</servlet-name>
+    <servlet-class>org.comstudy21.FormController</servlet-class>
   </servlet>
-  
+  <servlet>
+    <servlet-name>init</servlet-name>
+    <servlet-class>org.comstudy21.InitParamServlet</servlet-class>
+    <init-param>
+      <param-name>driver</param-name>
+      <param-value>oracle.jdbc.driver.OracleDriver</param-value>
+    </init-param>
+    <init-param>
+      <param-name>url</param-name>
+      <param-value>jdbc:oracle:thin@localhost:1521:orcl</param-value>
+    </init-param>
+    <init-param>
+      <param-name>user</param-name>
+      <param-value>scott</param-value>
+    </init-param>
+    <init-param>
+      <param-name>password</param-name>
+      <param-value>tiger</param-value>
+    </init-param>
+  </servlet>
   <servlet-mapping>
-  	<servlet-name>form</servlet-name>
-  	<url-pattern>/form.do</url-pattern>
+    <servlet-name>form</servlet-name>
+    <url-pattern>/form.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>init</servlet-name>
+    <url-pattern>/init</url-pattern>
   </servlet-mapping>
 </web-app>
