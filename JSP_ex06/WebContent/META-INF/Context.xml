@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+   
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+
+    <Resource auth="Container" driverClassName="org.h2.Driver" maxIdle="4" maxTotal="8" name="jdbc/PersonDB" password="" type="javax.sql.DataSource" url="jdbc:h2:tcp://localhost/~/test" username="sa"/>
+</Context>
