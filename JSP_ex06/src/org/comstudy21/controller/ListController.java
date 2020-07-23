@@ -1,6 +1,5 @@
 package org.comstudy21.controller;
 
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,18 +13,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.comstudy21.dao.dao;
-import org.comstudy21.dto.Person;
+import org.comstudy21.model.Person;
+import org.comstudy21.model.dao;
 
 @WebServlet("/list/*")
 public class ListController extends HttpServlet {
 	private ArrayList<Person> pList = null;
 	String ctxPath = null;
 	ServletContext context;
-	
+
 	public ListController() throws SQLException {
 		pList = dao.selectAll();
 	}
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("ListController ... doget");
@@ -34,30 +34,41 @@ public class ListController extends HttpServlet {
 		ctxPath = req.getContextPath();
 		int beginIndex = ctxPath.length();
 		String path = reqUri.substring(beginIndex);
-		
-		context.log(">>>> "+ path);
-		
-		String prefix = "/WEB-INF/jsp/";
+
+		context.log("ctxPath >>> " + ctxPath);
+		context.log(">>>> " + path);
+
+		String prefix = "/WEB-INF/views/";
 		String suffix = ".jsp";
-		String viewName = "form"; 
+		String viewName = "form";
 		boolean isRedirect = false;
-		
-		switch(path){
+
+		switch (path) {
 		case "/list":
 			viewName = "list";
+			req.setAttribute("P_list", pList);
 			break;
 		case "/list/input":
 			viewName = "form";
+			if (req.getParameter("input") != null) {
+				String name = req.getParameter("name");
+				String addr = req.getParameter("addr");
+				int age = Integer.parseInt(req.getParameter("age"));
+				try {
+					dao.insert(new Person(name, addr, age));
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 			break;
-		}
-		req.setAttribute("P_list", pList);
-		if(isRedirect){
+		}		
+		if (isRedirect) {
 			resp.sendRedirect(ctxPath + "/" + viewName);
-		}else{
-			viewName = prefix + viewName +suffix;
+		} else {
+			viewName = prefix + viewName + suffix;
 			RequestDispatcher view = req.getRequestDispatcher(viewName);
 			view.forward(req, resp);
 		}
-			
+
 	}
 }

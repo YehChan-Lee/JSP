@@ -1,5 +1,5 @@
 <%@page import="java.sql.Connection"%>
-<%@page import="org.comstudy21.dto.Person"%>
+<%@page import="org.comstudy21.model.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -16,11 +16,9 @@
 		ArrayList<Person> arr = (ArrayList<Person>)request.getAttribute("P_list");
 		out.println("<table border='1'>");
 		for(int i=0;i<arr.size();i++){
-			out.println("<tr>");
-			out.println("<td>"+arr.get(i).getUserName() +"</td>");
+			out.println("<tr><td>"+arr.get(i).getUserName() +"</td>");
 			out.println("<td>"+arr.get(i).getUserAddr()+"</td>");
-			out.println("<td>"+arr.get(i).getAge() +"</td>");
-			out.println("</tr>");
+			out.println("<td>"+arr.get(i).getAge() +"</td></tr>");
 		}
 		out.println("</table>");
 	%>
