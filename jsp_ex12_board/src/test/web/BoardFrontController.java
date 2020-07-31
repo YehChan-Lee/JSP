@@ -52,9 +52,7 @@ public class BoardFrontController extends HttpServlet {
 				}else{
 					viewName = "/WEB-INF/views/board/detail.jsp";
 					request.setAttribute("failpw", "비밀번호가 틀림");
-				}
-				
-				
+				}				
 			}
 			RequestDispatcher view = request.getRequestDispatcher(viewName);
 			view.forward(request, response);
